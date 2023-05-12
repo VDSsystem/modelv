@@ -8,11 +8,12 @@ cors = CORS(app, resources={r'*': {'origins': '*'}})
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     if request.method == 'POST':
-        id = request.json['id']
-        url = f"https://vadss.vercel.app/api/savedImages?id={id}"
-        response = requests.get(url)
-        data = response.json()
-        url = data['url']
+       # id = request.json['id']
+       # url = f"https://vadss.vercel.app/api/savedImages?id={id}"
+       # response = requests.get(url)
+       # data = response.json()
+        #url = data['url']
+        url = request.json["url"]
     # create the response with the Access-Control-Allow-Origin header
         weights_path = 'best.pt'
         subprocess.run(['python', 'detect.py', '--source', url, '--weights', weights_path])
