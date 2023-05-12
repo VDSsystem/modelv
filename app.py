@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS
-from model import run_detection
+import subprocess
 
 app = Flask(__name__)
 cors = CORS(app, resources={r'*': {'origins': '*'}})
@@ -13,8 +13,7 @@ def hello_world():
         response = requests.get(url)
         data = response.json()
         url = data['url']
-        output, error = run_detection(url)
-
+        subprocess.run(['python', 'detect.py', '--source', source_url])
     # create the response with the Access-Control-Allow-Origin header
         resp = jsonify({'url': url})
         resp.headers.add('Access-Control-Allow-Origin', '*')
