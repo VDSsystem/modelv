@@ -10,11 +10,11 @@ def hello_world():
         id = request.json['id']
         url = f"https://vadss.vercel.app/api/savedImages?id={id}"
         response = requests.get(url)
-        data = response.json()        
-    # Download the image from the URL
-        imageURL =  data['url']
-        response = {'url': imageURL}
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return jsonify(response)
+        data = response.json()
+        url = data['url']
+    # create the response with the Access-Control-Allow-Origin header
+        resp = jsonify({'url': url})
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
     else:
         return "YOLOv5 Model APP"
